@@ -174,9 +174,14 @@ angular.module('picsilyApp')
     
         }])
         .controller('LoginController', ['$scope', 'userFactory', function($scope, userFactory) {
+            $scope.showLogin = false;
             $scope.messages = {loginMessage:  ""};
             $scope.user = {username: "",password: ""};
             $scope.loggedIn = false;
+
+            $scope.showToggle = function(){
+                $scope.showLogin = $scope.showLogin;
+            }
 
             $scope.login = function(){
                 $scope.messages.loginMessage = "Logging you in...";
