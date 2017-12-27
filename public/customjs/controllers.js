@@ -173,7 +173,7 @@ angular.module('picsilyApp')
                                     */
     
         }])
-        .controller('LoginController', ['$scope', 'userFactory', function($scope, userFactory) {
+        .controller('LoginController', ['$scope', '$rootScope', 'userFactory', function($scope, $rootScope, userFactory) {
             $scope.showLogin = false;
             $scope.messages = {loginMessage:  ""};
             $scope.user = {username: "",password: ""};
@@ -190,6 +190,7 @@ angular.module('picsilyApp')
                         function(response){
                             $scope.messages.loginMessage = "Logged in! :)";
                             $scope.loggedIn = true;
+                            $rootScope.isUserLoggedIn = true;
                             $scope.$apply();
                         },
                         function(response) {
@@ -202,3 +203,15 @@ angular.module('picsilyApp')
         .controller('CardsController', ['$scope', 'photoFactory', function($scope, photoFactory) {
 
         }])
+
+        .controller('HomeController', ['$scope', '$rootScope', 'userFactory', function($scope, $rootScope, userFactory) {
+            $scope.isLoggedIn = false;
+            $rootScope.isUserLoggedIn = false;
+            userFactory.getUser(function(response){
+                if(response.username){
+                    $scope.isLoggedIn = true;
+                    $rootScope.isUserLoggedIn = true;
+                    $scope.apply();
+                }
+            });
+        }]);

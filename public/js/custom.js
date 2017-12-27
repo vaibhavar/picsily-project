@@ -9,6 +9,19 @@
 var picsilyAppUtil = {};
 picsilyAppUtil.serviceUtil = {
     token: "",
+    setToken: function(sToken){
+        if(localStorage){
+            // Store in localStorage
+            localStorage.setItem("token", sToken);
+        }
+        else{
+            // Store in global object
+            picsilyAppUtil.serviceUtil.token = sToken;
+        }
+    },
+    getToken: function(){
+        return localStorage.getItem("token") || picsilyAppUtil.serviceUtil.token;
+    },
     /**
      * gets Data from service 
      * @param  {String} sUrl URL of service
@@ -16,7 +29,7 @@ picsilyAppUtil.serviceUtil = {
      */
     getDataFromService: function(sUrl){
         return fetch(sUrl, {
-            headers: new Headers({"x-access-token": picsilyAppUtil.serviceUtil.token})
+            headers: {"x-access-token": picsilyAppUtil.serviceUtil.getToken()}
         });
     },
     /**
@@ -34,7 +47,7 @@ picsilyAppUtil.serviceUtil = {
 
         return fetch(sUrl, {
             method: 'POST',
-            headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: oFormData
         });
     },
