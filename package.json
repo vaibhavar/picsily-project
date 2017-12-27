@@ -1,5 +1,5 @@
 {
-  "name": "rest-server",
+  "name": "heroke-test",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "install": "^0.10.1",
     "jade": "~1.11.0",
     "jsonwebtoken": "^7.4.3",
+    "mdbootstrap": "^4.4.3",
     "mongoose": "^4.11.7",
     "mongoose-currency": "^0.2.0",
     "morgan": "~1.8.1",

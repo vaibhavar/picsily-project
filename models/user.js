@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var User = new Schema({
-    username: String,
+    username: String,   // would be used as profile URL also
     password: String,
     firstname: {
       type: String,
