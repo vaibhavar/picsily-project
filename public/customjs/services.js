@@ -53,7 +53,7 @@ angular.module('picsilyApp')
     
             var oFactory = {};
             oFactory.getUser = function(){
-                return picsilyAppUtil.serviceUtil.getDataFromService("/user/loggedInUser");
+                return picsilyAppUtil.serviceUtil.getDataFromService("/users/loggedInUser");
             };
 
             oFactory.login = function(username, password){

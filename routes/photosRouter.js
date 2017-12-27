@@ -32,16 +32,17 @@ photoRouter.route("/")
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
     // Assuming name and description has been sent from request in JSON
     if(req.body.fileURL){
-        var oUser = req.user;
+        console.log("User = ",req.decoded._doc);
+        var oUser = req.decoded._doc;
         var oPhoto = {
             title: req.body.title,
             fileURL: req.body.fileURL,
             colors: [],     // TODO detect colors and add here
             tags: [],       // TODO handle tags
-            user: req.user
+            userId: mongoose.Types.ObjectId(req.decoded._doc._id)
         }
         // Assuming req.body contains new photo object
-        Photos.create(req.body, function(err, photo){
+        Photos.create(oPhoto, function(err, photo){
             if(err){
                 throw err;
             }

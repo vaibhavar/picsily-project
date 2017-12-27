@@ -1,9 +1,12 @@
 <main>
     <div class="container" style="height:1300px;" ng-controller="HomeController">
         <div class="row mt-5 pt-5">
+            <!-- Login box -->
             <div class="col-md-5" ng-if="!$root.isUserLoggedIn" ng-include="'views/login.html'"></div>
-            <div class="col-md-5" ng-if="$root.isUserLoggedIn" ng-include="'views/welcome.html'"></div>
-           
+            <!-- Add photo widget -->
+            <div class="col-md-4" ng-if="$root.isUserLoggedIn" ng-include="'views/welcome.html'"></div>
+            <!-- Photos from community -->
+            <div class="col-md-4" ng-repeat="photo in photos" ng-controller="CardsController" ng-include="'views/photo-card.html'"></div>
             <div class="col-md-7" ng-controller="CardsController">
                 
             </div>

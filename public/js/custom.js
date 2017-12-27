@@ -47,7 +47,7 @@ picsilyAppUtil.serviceUtil = {
 
         return fetch(sUrl, {
             method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-access-token': picsilyAppUtil.serviceUtil.getToken()},
             body: oFormData
         });
     },
@@ -55,7 +55,7 @@ picsilyAppUtil.serviceUtil = {
         return picsilyAppUtil.serviceUtil.postDataToService("/users/login", {username: username, password: password})
         	.then((oData) => oData.json())
             .then(function(oUserData){
-                picsilyAppUtil.serviceUtil.token = oUserData.token;
+                picsilyAppUtil.serviceUtil.setToken(oUserData.token);
                 return oUserData
             });
     }

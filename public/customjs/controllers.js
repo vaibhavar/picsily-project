@@ -204,14 +204,27 @@ angular.module('picsilyApp')
 
         }])
 
-        .controller('HomeController', ['$scope', '$rootScope', 'userFactory', function($scope, $rootScope, userFactory) {
+        .controller('HomeController', ['$scope', '$rootScope', 'userFactory', 'photoFactory', function($scope, $rootScope, userFactory, photoFactory) {
+            $scope.photos = [];
             $scope.isLoggedIn = false;
             $rootScope.isUserLoggedIn = false;
-            userFactory.getUser(function(response){
+            $rootScope.user = {username: '', firstname: '', lastname: ''};
+            userFactory.getUser().then(function(response){
+                return response.json()
+            }).then(function(response){
                 if(response.username){
                     $scope.isLoggedIn = true;
                     $rootScope.isUserLoggedIn = true;
+                    $rootScope.user = response;
                     $scope.apply();
                 }
             });
+
+            photoFactory.getPhotos().then(function(response){
+                return response.json();
+            }).then(function(oPhotos){
+                $scope.photos = oPhotos;
+                $scope.apply();
+            });
+
         }]);

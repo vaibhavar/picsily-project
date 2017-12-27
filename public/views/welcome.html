@@ -1,1 +1,20 @@
-<h3>Welcome :)</h3>
+<div class="card">
+    <!--Card image-->
+    <div class="view hm-stylish-strong">
+        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%287%29.jpg" class="img-fluid" alt="">
+        <a href="/">
+            <div class="mask flex-center">
+                <p class="white-text h3">Hey there <i class="fa fa-heart pink-text"></i> {{$root.user.username}} !</p>
+            </div>
+        </a>
+    </div>
+    <!--Card content-->
+    <div class="card-body">
+    	<h4 class="card-title">Add some photos</h4>
+        <form>
+            <div class="form-group">
+                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+        </form>
+    </div>
+</div>
