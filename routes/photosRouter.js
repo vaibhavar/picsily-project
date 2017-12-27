@@ -2,6 +2,10 @@ var express = require("express");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+// Used for photo upload
+var cloudinary = require('cloudinary')
+var multer = require("multer");
+var upload = multer({ dest: "uploads" }); // multer configuration
 
 // Photo model
 var Photos = require('../models/photos');
@@ -16,6 +20,19 @@ var photoRouter = express.Router();
 photoRouter.use(morgan('dev'));
 // Middleware for parsing JSON requests
 photoRouter.use(bodyParser.json());
+
+photoRouter.route("/upload")
+.post(upload.single("file"), function(req, res, next){    // Verify.verifyOrdinaryUser,
+    console.log("File = ",req.file.path);
+    //res.json(req.file);
+    cloudinary.config("cloudinary://578513365711197:");
+    cloudinary.config({ 
+      cloud_name: 'hj4eeazq0', 
+      api_key: '578513365711197', 
+      api_secret: 'ngNEJtjRQf8Wui5SWr3PPKAWWcA' 
+    });
+    cloudinary.uploader.upload(req.file.path, function(result) { res.json(result) });
+});
 
 // Photos collection handler
 photoRouter.route("/")

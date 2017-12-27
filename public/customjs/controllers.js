@@ -223,6 +223,12 @@ angular.module('picsilyApp')
 
         }])
 
+        .controller('UploadController', ['$scope','$rootScope', 'userFactory',  'photoFactory', function($scope, $rootScope, userFactory, photoFactory) {
+            $scope.upload = function(){
+                debugger;
+            }
+        }])
+
         .controller('HomeController', ['$scope', '$rootScope', 'userFactory', 'photoFactory', function($scope, $rootScope, userFactory, photoFactory) {
             $scope.photos = [];
             $scope.isLoggedIn = false;
