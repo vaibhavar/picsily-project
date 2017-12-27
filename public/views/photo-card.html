@@ -7,5 +7,13 @@
     </div>
     <!--Card content-->
     <div class="card-body">
+        <div class="pull-left">
+            <img src="https://ui-avatars.com/api/?background=ec407a&color=fff&name={{photo.userId.firstname}} {{photo.userId.lastname}}" class="rounded-circle" style="width: 50px;">
+            {{photo.userId.username}}
+        </div>
+        <div class="flex-row pull-right">
+            <a class="card-link btn btn-black px-3"><i class="fa fa-retweet"></i></a>
+            <a class="card-link btn btn-elegant px-3"><i class="fa fa-comment"></i></a>
+        </div>
     </div>
 </div>

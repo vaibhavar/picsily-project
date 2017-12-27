@@ -21,7 +21,7 @@ photoRouter.use(bodyParser.json());
 photoRouter.route("/")
 .get(function(req, res, next){
     // Find all photos from mongoDB
-    Photos.find({})
+    Photos.find({}).populate('userId')
           .exec(function(err, photo){
             if(err){ 
                 throw err;
