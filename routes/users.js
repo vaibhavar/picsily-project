@@ -17,7 +17,9 @@ userRouter.get('/', Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req,
 });
 
 userRouter.get('/loggedInUser', Verify.verifyOrdinaryUser, function(req, res, next){
-  res.json(req.user);
+  var oItem = req.decoded._doc;
+  var oUser = {firstname: oItem.firstname, lastname: oItem.lastname, username: oItem.username};
+  res.json(oUser);
 });
 
 // No authentication needed for regiser :)

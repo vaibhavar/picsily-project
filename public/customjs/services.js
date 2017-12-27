@@ -62,4 +62,14 @@ angular.module('picsilyApp')
             
             return oFactory;
             
+        }])
+        .factory('photoFactory', ["$resource", 'baseURL', function($resource, baseURL) {
+    
+            var oFactory = {};
+            oFactory.getPhotos = function(){
+                return picsilyAppUtil.serviceUtil.getDataFromService("/photos/");
+            };
+            
+            return oFactory;
+            
         }]);

@@ -15,7 +15,9 @@ picsilyAppUtil.serviceUtil = {
      * @return {Promise}      Response promise
      */
     getDataFromService: function(sUrl){
-        return fetch(sUrl);
+        return fetch(sUrl, {
+            headers: new Headers({"x-access-token": picsilyAppUtil.serviceUtil.token})
+        });
     },
     /**
      * Posts data to service

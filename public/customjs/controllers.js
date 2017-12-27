@@ -198,3 +198,7 @@ angular.module('picsilyApp')
             };
 
         }])
+
+        .controller('CardsController', ['$scope', 'photoFactory', function($scope, photoFactory) {
+
+        }])

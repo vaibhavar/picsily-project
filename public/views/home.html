@@ -1,13 +1,13 @@
 <main>
-    <div class="container" style="height:1300px;" ng-controller="LoginController">
+    <div class="container" style="height:1300px;">
         <div class="row mt-5 pt-5">
-            <div class="col-md-5">
+            <div class="col-md-5" ng-controller="LoginController">
                 <!--Card-->
                 <div class="card">
                     <!--Card image-->
                     <div class="view hm-stylish-strong">
                         <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%287%29.jpg" class="img-fluid" alt="">
-                        <a href="#">
+                        <a href="/">
                             <div class="mask flex-center">
                                 <p class="white-text h3">Picsily <i class="fa fa-heart pink-text"></i> photography</p>
                             </div>
@@ -15,7 +15,7 @@
                     </div>
                     <!--Card content-->
                     <div class="card-body">
-                        <form ng-submit="login()" ng-show="!showLogin" class="animated fadeIn">
+                        <form ng-submit="register()" ng-show="!showLogin" class="animated fadeIn">
                              <div class="md-form">
                                 <input type="text" name="username" ng-model="user.username" id="username" class="form-control">
                                 <label for="username" class="">Username</label>
@@ -25,10 +25,16 @@
                                 <label for="password" class="">Password</label>
                             </div>
                             <div class="md-form">
+                                <input type="password" name="password2" ng-model="user.password2" id="password2" class="form-control">
+                                <label for="password2" class="">Repeat Password</label>
+                            </div>
+                            <div class="md-form">
                                 <input type="email" name="email" ng-model="user.email" id="email" class="form-control">
                                 <label for="email" class="">Email</label>
                             </div>
-                            <a href="javascript:;" class="btn btn-primary btn-pink">Join Now</a>
+                            <div class="text-center">
+                                <a href="javascript:;" class="btn btn-primary btn-pink">Join Now</a>
+                            </div>
                             <p class="pull-right">Already a member? <a href="javascript:;" ng-click="showToggle()"> Login </a></p>
                         </form>
                         <!-- Form login -->
@@ -49,6 +55,9 @@
                     </div>
                 </div>
                 <!--/.Card-->
+            </div>
+            <div class="col-md-7" ng-controller="CardsController">
+                
             </div>
         </div>
     </div>
