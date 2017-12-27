@@ -16,6 +16,10 @@ userRouter.get('/', Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req,
   });
 });
 
+userRouter.get('/loggedInUser', Verify.verifyOrdinaryUser, function(req, res, next){
+  res.json(req.user);
+});
+
 // No authentication needed for regiser :)
 userRouter.post('/register', function(req, res) {
     User.register(new User({ username : req.body.username }),

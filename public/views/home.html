@@ -1,0 +1,45 @@
+<main>
+    <div class="container" style="height:1300px;" ng-controller="LoginController">
+        <div class="row mt-5 pt-5">
+            <div class="col-md-5">
+                <!--Card-->
+                <div class="card">
+                    <!--Card image-->
+                    <div class="view overlay hm-white-slight">
+                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%287%29.jpg" class="img-fluid" alt="">
+                        <a href="#">
+                            <div class="mask"></div>
+                        </a>
+                    </div>
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">Welcome to Picsily</h4>
+                        <!--Text-->
+                        <p class="card-text">A community of people who love inspirational photography.</p>
+                        <a href="#" class="btn btn-primary">Join Now</a>
+                    </div>
+                </div>
+                <!--/.Card-->
+            </div>
+            <div class="col-md-5">
+                <!-- Form register -->
+                <form ng-submit="login()">
+                    <p class="h5 text-center mb-4">Login</p>
+                    <h3>{{messages.loginMessage}}</h3>
+                    <div class="form-group">
+                        <label for="loginForm-name" class="control-label">Username</label>
+                        <input name="username" ng-model="user.username" type="text" id="loginForm-name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginForm-pass control-label">Password</label>
+                        <input name="password" ng-model="user.password" type="password" id="loginForm-pass" class="form-control">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-pink waves-effect">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

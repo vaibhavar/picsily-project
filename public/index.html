@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="picsilyApp">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UI-Compatible" content="IE=edge">
@@ -9,40 +10,30 @@
     <!-- Material Design bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/custom.css" />
 </head>
+
 <body>
-<!--Main Navigation-->
-<header>
+    <!--Main Navigation-->
+    <div ui-view="header"></div>
+    <!--Main Layout-->
+    <div ui-view="content"></div>
+    <div ui-view="footer"></div>
+    
+   <script src="js/custom.js"></script>
+    <!-- Angular from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+    <!-- Angular Router -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>\
+    <!-- Angular Resource -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.6/angular-resource.min.js"></script>
+    <!-- App , Controller and Service -->
+    <script src="customjs/app.js"></script>
+    <script src="customjs/controllers.js"></script>
+    <script src="customjs/services.js"></script>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-dark bg-pink scrolling-navbar">
-        <a class="navbar-brand" href="/"><strong>Picsily</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><span class="hidden-xs"> Home</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Collections</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">People</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav nav-flex-icons">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-</header>
-
-<script src="js/mdb.min.js"></script>
-
+    <!-- <script src="js/mdb.min.js"></script> -->
 </body>
+
 </html>

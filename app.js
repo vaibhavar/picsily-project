@@ -14,15 +14,11 @@ var leaderRouter = require("./routes/leaderRouter");
 var promoRouter = require("./routes/promoRouter");
 var favoritesRouter = require("./routes/favoritesRouter");
 
-// If an environment variable NODE_ENV is not equal to PROD
-// We need to load local env file for running the app locally
-if(process.env.NODE_ENV !== 'production'){
-  process.env['MONGODB_URI'] = 'mongodb://localhost:27017/conFusion';
-  //require('dotenv').load();
-}
 
 
 var config = require("./config");
+
+console.log("Config = ",config);
 
 var app = express();
 
