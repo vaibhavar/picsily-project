@@ -59,6 +59,10 @@ angular.module('picsilyApp')
             oFactory.login = function(username, password){
               return picsilyAppUtil.serviceUtil.loginUser(username, password);
             };
+
+            oFactory.register = function(firstname, lastname, username, password){
+                return picsilyAppUtil.serviceUtil.registerUser(firstname, lastname, username, password);
+            };
             
             return oFactory;
             

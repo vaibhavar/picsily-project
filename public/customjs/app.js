@@ -22,17 +22,20 @@ angular.module('picsilyApp', ['ui.router', 'ngResource'])
 
             })
         
-            // route for the aboutus page
-            /*.state('app.aboutus', {
-                url:'aboutus',
+            // route for the collections page
+            .state('app.collections', {
+                url:'collections',
                 views: {
+                    'header': {
+                        templateUrl : 'views/header.html',
+                    },
                     'content@': {
-                        templateUrl : 'views/aboutus.html',
-                        controller  : 'AboutController'                  
+                        templateUrl : 'views/collections.html',
+                        controller  : 'CollectionsController'                  
                     }
                 }
             })
-        
+            /*
             // route for the contactus page
             .state('app.contactus', {
                 url:'contactus',

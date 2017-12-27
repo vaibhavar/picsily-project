@@ -1,10 +1,3 @@
-(function(){
-	function onRegister(){
-		return false;
-	}
-	window.onRegister = onRegister;
-})();
-
 // Globals
 var picsilyAppUtil = {};
 picsilyAppUtil.serviceUtil = {
@@ -58,5 +51,8 @@ picsilyAppUtil.serviceUtil = {
                 picsilyAppUtil.serviceUtil.setToken(oUserData.token);
                 return oUserData
             });
+    },
+    registerUser: function(firstname, lastname, username, password){
+        return picsilyAppUtil.serviceUtil.postDataToService("/users/register", {firstname: firstname, lastname: lastname, username: username, password: password});
     }
 };

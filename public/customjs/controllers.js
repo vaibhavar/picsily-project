@@ -175,7 +175,7 @@ angular.module('picsilyApp')
         }])
         .controller('LoginController', ['$scope', '$rootScope', 'userFactory', function($scope, $rootScope, userFactory) {
             $scope.showLogin = false;
-            $scope.messages = {loginMessage:  ""};
+            $scope.messages = {loginMessage:  "", registerMessage: ""};
             $scope.user = {username: "",password: ""};
             $scope.loggedIn = false;
 
@@ -198,9 +198,28 @@ angular.module('picsilyApp')
                     });   
             };
 
+            $scope.register = function(){
+                $scope.messages.registerMessage = "Signing up...";
+                userFactory.register($scope.user.firstname, $scope.user.lastname, $scope.user.username, $scope.user.password).then(function(response){
+                    return response.json();
+                }).then(function(oData){
+                    $scope.messages.registerMessage = "Welcome to Picsily";
+                });
+            }
+
         }])
 
         .controller('CardsController', ['$scope', 'photoFactory', function($scope, photoFactory) {
+
+        }])
+
+        .controller('CollectionsController', ['$scope', 'photoFactory', function($scope, photoFactory) {
+            $scope.photos = [];
+            photoFactory.getPhotos().then(function(response){
+                return response.json();
+            }).then(function(oPhotos){
+                $scope.photos = oPhotos;
+            });
 
         }])
 
