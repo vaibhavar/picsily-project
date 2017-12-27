@@ -17,28 +17,33 @@
                         <h4 class="card-title">Welcome to Picsily</h4>
                         <!--Text-->
                         <p class="card-text">A community of people who love inspirational photography.</p>
-                        <a href="#" class="btn btn-primary btn-pink">Join Now</a>
+                        
+                        <form ng-submit="login()" ng-show="!showLogin" class="animated fadeIn">
+                            <a href="javascript:;" class="btn btn-primary btn-pink">Join Now</a>
+                            <br/>
+                            <a href="javascript:;" ng-click="showToggle()">Already a member ? Login </a>
+                        </form>
+                          <!-- Form login -->
+                        <form ng-submit="login()" ng-show="showLogin" class="animated fadeIn">
+                            <p class="h5 text-center mb-4">Login</p>
+                            <h3>{{messages.loginMessage}}</h3>
+                            <div class="form-group">
+                                <label for="loginForm-name" class="control-label">Username</label>
+                                <input name="username" ng-model="user.username" type="text" id="loginForm-name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="loginForm-pass control-label">Password</label>
+                                <input name="password" ng-model="user.password" type="password" id="loginForm-pass" class="form-control">
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-pink waves-effect">Login</button>
+                            </div>
+                            <br/>Not a member yet? <a href="#" ng-click="showToggle()">Sign up </a>
+                        </form>
+
                     </div>
                 </div>
                 <!--/.Card-->
-            </div>
-            <div class="col-md-5">
-                <!-- Form register -->
-                <form ng-submit="login()">
-                    <p class="h5 text-center mb-4">Login</p>
-                    <h3>{{messages.loginMessage}}</h3>
-                    <div class="form-group">
-                        <label for="loginForm-name" class="control-label">Username</label>
-                        <input name="username" ng-model="user.username" type="text" id="loginForm-name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="loginForm-pass control-label">Password</label>
-                        <input name="password" ng-model="user.password" type="password" id="loginForm-pass" class="form-control">
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-pink waves-effect">Login</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

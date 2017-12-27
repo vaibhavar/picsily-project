@@ -180,7 +180,7 @@ angular.module('picsilyApp')
             $scope.loggedIn = false;
 
             $scope.showToggle = function(){
-                $scope.showLogin = $scope.showLogin;
+                $scope.showLogin = !$scope.showLogin;
             }
 
             $scope.login = function(){
