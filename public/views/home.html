@@ -6,10 +6,7 @@
             <!-- Add photo widget -->
             <div class="col-md-4" ng-if="$root.isUserLoggedIn" ng-include="'views/welcome.html'"></div>
             <!-- Photos from community -->
-            <div class="col-md-4" ng-repeat="photo in photos" ng-controller="CardsController" ng-include="'views/photo-card.html'"></div>
-            <div class="col-md-7" ng-controller="CardsController">
-                
-            </div>
+            <div class="col-md-4" ng-if="$root.isUserLoggedIn" ng-repeat="photo in photos" ng-controller="CardsController" ng-include="'views/photo-card.html'"></div>
         </div>
     </div>
 </main>
