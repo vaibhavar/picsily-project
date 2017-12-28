@@ -53,6 +53,19 @@ photoRouter.route("/upload")
      });
 });
 
+photoRouter.route("/my")
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
+
+    // Find all photos from mongoDB
+    Photos.find({userId: req.decoded._doc}).populate('userId')
+          .exec(function(err, photo){
+            if(err){ 
+                throw err;
+            }
+            res.json(photo);
+        });
+});
+
 // Photos collection handler
 photoRouter.route("/")
 .get(function(req, res, next){

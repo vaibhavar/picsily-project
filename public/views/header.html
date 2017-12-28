@@ -18,7 +18,8 @@
             </ul>
             <ul class="navbar-nav nav-flex-icons">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login </a>
+                    <a class="nav-link" ui-sref="app" ng-show="!isLoggedIn">Login </a>
+                    <a class="nav-link" ng-click="logout()" ng-show="isLoggedIn">Logout </a>
                 </li>
             </ul>
         </div>

@@ -67,6 +67,9 @@ picsilyAppUtil.serviceUtil = {
                 return oUserData
             });
     },
+    logoutUser: function(){
+        picsilyAppUtil.serviceUtil.setToken("");
+    },
     registerUser: function(firstname, lastname, username, password){
         return picsilyAppUtil.serviceUtil.postDataToService("/users/register", {firstname: firstname, lastname: lastname, username: username, password: password});
     },

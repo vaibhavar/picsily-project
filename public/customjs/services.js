@@ -2,53 +2,6 @@
 
 angular.module('picsilyApp')
         .constant("baseURL","http://localhost:3000/")
-        .service('menuFactory', ['$resource', 'baseURL', function($resource, baseURL) {
-    
-            var dishes=[];
-            var promotions = [];
-
-            /*this.getPromotions = function(){
-                return $resource(baseURL+"promotions/:id", null, {'update': {'method': 'PUT'}});
-            };
-            */
-           
-            /*
-            this.getDishes = function(){
-                return $resource(baseURL+"dishes/:id", null, {'update': {'method': 'PUT'}});
-            };
-            */
-    
-                //this.getDish = function (index) {
-                //    return $resource.get(baseURL+"dishes/"+index);
-                //};
-    
-                // implement a function named getPromotion
-                // that returns a selected promotion.
-                
-                //this.getPromotion = function(index){
-                //   return promotions[index];
-                //}
-                        
-        }]) 
-        .factory('corporateFactory', ["$resource", 'baseURL', function($resource, baseURL) {
-    
-            var oFactory = {};
-            /*oFactory.getLeaders = function(){
-                return $resource(baseURL+"leadership/:id", null, {'update': {'method': 'PUT'}});
-            };*/
-            return oFactory;
-            
-        }])
-        .factory('feedbackFactory', ["$resource", 'baseURL', function($resource, baseURL) {
-    
-            var oFactory = {};
-            /*oFactory.getFeedback = function(){
-                return $resource(baseURL+"feedback/:id", null, {'update': {'method': 'PUT'}});
-            };*/
-            
-            return oFactory;
-            
-        }])
         .factory('userFactory', ["$resource", 'baseURL', function($resource, baseURL) {
     
             var oFactory = {};
@@ -72,6 +25,7 @@ angular.module('picsilyApp')
             var oFactory = {};
             oFactory.photos = [];
             oFactory.feedPhotos = [];
+            oFactory.myPhotos = [];
             oFactory.observers = [];
 
             oFactory.updateObservers = function(){
@@ -102,6 +56,21 @@ angular.module('picsilyApp')
                 });
             }
 
+            oFactory.loadMyPhotos = function(){
+                picsilyAppUtil.serviceUtil.getDataFromService("/photos/my/")
+                .then(function(response){
+                    return response.json()
+                })
+                .then(function(aPhotos){
+                    angular.copy(aPhotos, oFactory.myPhotos);
+                    oFactory.updateObservers();
+                });
+            };
+
+            oFactory.getMyPhotos = function(){
+                return oFactory.myPhotos;
+            };
+
             oFactory.getPhotos = function(){
                 return oFactory.photos;
             };
@@ -111,6 +80,7 @@ angular.module('picsilyApp')
             };
 
             oFactory.reloadPhotos();
+            oFactory.loadMyPhotos();
             
             return oFactory;
             

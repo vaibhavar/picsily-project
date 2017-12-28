@@ -1,129 +1,8 @@
 'use strict';
 
 angular.module('picsilyApp')
-
-        .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
-
-            $scope.showMenu = true;
-            $scope.message = "Loading ...";
-            $scope.dishes= {};
-            
-
-            $scope.tab = 1;
-            $scope.filtText = '';
-            $scope.showDetails = true;
-
-            $scope.dishes = menuFactory.getDishes().query( function(response) {
-                    $scope.dishes = response;
-                    $scope.showMenu = true;
-                },
-                function(response) {
-                    $scope.message = "Error: "+response.status + " " + response.statusText;
-                });
-                        
-            $scope.select = function(setTab) {
-                $scope.tab = setTab;
-                
-                if (setTab === 2) {
-                    $scope.filtText = "appetizer";
-                }
-                else if (setTab === 3) {
-                    $scope.filtText = "mains";
-                }
-                else if (setTab === 4) {
-                    $scope.filtText = "dessert";
-                }
-                else {
-                    $scope.filtText = "";
-                }
-            };
-
-            $scope.isSelected = function (checkTab) {
-                return ($scope.tab === checkTab);
-            };
-    
-            $scope.toggleDetails = function() {
-                $scope.showDetails = !$scope.showDetails;
-            };
-        }])
-
-        .controller('ContactController', ['$scope', function($scope) {
-
-            $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
-            var channels = [{value:"tel", label:"Tel."}, {value:"Email",label:"Email"}];
-            $scope.channels = channels;
-            $scope.invalidChannelSelection = false;
-                        
-        }])
-
-        .controller('FeedbackController', ['$scope', 'feedbackFactory', function($scope, feedbackFactory) {
-            $scope.feedback = {};
-            $scope.sendFeedback = function() {
-                
-                console.log($scope.feedback);
-                
-                if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
-                    $scope.invalidChannelSelection = true;
-                    console.log('incorrect');
-                }
-                else {
-                    // Store to server
-                    feedbackFactory.getFeedback()
-                                   .save($scope.feedback);
-                    $scope.invalidChannelSelection = false;
-                    $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
-                    $scope.feedback.mychannel="";
-                    $scope.feedbackForm.$setPristine();
-                    console.log($scope.feedback);
-                }
-            };
-        }])
-
-        .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
-
-            $scope.dish = {};
-            $scope.showDish = true;
-            $scope.message="Loading ...";
-            /*$scope.dish = menuFactory.getDishes()
-                .get({id:parseInt($stateParams.id,10)})
-                .$promise.then(
-                    function(response){
-                        $scope.dish = response;
-                        $scope.showDish = true;
-                    },
-                    function(response) {
-                        $scope.message = "Error: "+response.status + " " + response.statusText;
-                    });*/
-
-            
-        }])
-
-        .controller('DishCommentController', ['$scope', 'menuFactory', function($scope, menuFactory) {
-            
-            $scope.mycomment = {rating:5, comment:"", author:"", date:""};
-            
-            $scope.submitComment = function () {
-                
-                $scope.mycomment.date = new Date().toISOString();
-                
-                $scope.dish.comments.push($scope.mycomment);
-                
-                menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
-
-                $scope.commentForm.$setPristine();
-                
-                $scope.mycomment = {rating:5, comment:"", author:"", date:""};
-            }
-        }])
-
-        .controller('IndexController', ['$scope', '$stateParams','corporateFactory', 'menuFactory','userFactory', function($scope,$stateParams,corporateFactory, menuFactory, userFactory) {
-            // Chef section (fourth leader)
-            $scope.showPromotion = false;
-            $scope.promotionMessage = "Loading ...";            
-            $scope.showDish = false;
-            $scope.message="Loading ...";
-            $scope.leaderMessage = "Loading ...";
-            $scope.showLeader = false;
+     
+        .controller('IndexController', ['$scope', '$stateParams','userFactory', function($scope,$stateParams, userFactory) {
             $scope.loggedIn = false;
 
             $scope.user = userFactory.getUser().then(function(response){
@@ -133,44 +12,6 @@ angular.module('picsilyApp')
             function(errorResponse){
                 $scope.userError = "Error: "+errorResponse.status + " " + errorResponse.statusText;
             });
-
-            // Promotion (first promotion)
-            /*$scope.promotion = menuFactory.getPromotions()
-                                        .get({id: 0})
-                                        .$promise.then(
-                                            function(response){
-                                                $scope.promotion = response;
-                                                $scope.showPromotion = true;
-                                            },
-                                            function(response) {
-                                                $scope.promotionMessage = "Error: "+response.status + " " + response.statusText;
-                                        });
-
-
-            $scope.dish = {};
-            // Dish to display on homepage (first dish)
-            $scope.dish = menuFactory.getDishes()
-                                    .get({id:0})
-                                    .$promise.then(
-                                        function(response){
-                                            $scope.dish = response;
-                                            $scope.showDish = true;
-                                        },
-                                        function(response) {
-                                            $scope.message = "Error: "+response.status + " " + response.statusText;
-                                    });
-            
-            corporateFactory.getLeaders()
-                            .get({id: 3})
-                            .$promise.then(
-                                        function(response){
-                                            $scope.leader = response;
-                                            $scope.showLeader = true;
-                                        },
-                                        function(response) {
-                                            $scope.leaderMessage = "Error: "+response.status + " " + response.statusText;
-                                    });
-                                    */
     
         }])
         .controller('LoginController', ['$scope', '$rootScope', 'userFactory', function($scope, $rootScope, userFactory) {
@@ -251,11 +92,13 @@ angular.module('picsilyApp')
             };
 
             $scope.startUpload = function(){
+                $rootScope.isLoading = true;
                 var oFileInput = jQuery(".fab-input")[0];
                 var oFile = oFileInput.files[0];
                 photoFactory.upload(oFile).then(function(oPhoto){
                     $scope.cancelFile();
                     $scope.$apply();
+                    $rootScope.isLoading = false;
                     oPhoto.json().then(function(oPhoto){
                         photoFactory.addPhoto(oPhoto);    
                         alert("Uploaded");
@@ -270,6 +113,20 @@ angular.module('picsilyApp')
 
         }])
         .controller('MenuController', ['$scope', '$rootScope', 'userFactory', 'photoFactory', function($scope, $rootScope, userFactory, photoFactory) {
+            $scope.isLoggedIn = false;
+            userFactory.getUser().then(function(response){
+                return response.json();
+            }).then(function(response){
+                if(response.username){
+                    $scope.isLoggedIn = true;
+                    $scope.$apply();
+                }
+            });
+
+            $scope.logout = function(){
+                picsilyAppUtil.serviceUtil.logoutUser();
+                window.location.reload();
+            };
 
         }])
         .controller('HomeController', ['$scope', '$rootScope', 'userFactory', 'photoFactory', function($scope, $rootScope, userFactory, photoFactory) {
@@ -288,18 +145,9 @@ angular.module('picsilyApp')
                 }
             });
 
-            $scope.photos = photoFactory.getPhotos();
-
             photoFactory.observe(function(){
-                $scope.photos = photoFactory.getPhotos();
+                $scope.photos = photoFactory.getMyPhotos();
                 $scope.$apply();
             });
-
-            /*photoFactory.getPhotos().then(function(response){
-                return response.json();
-            }).then(function(oPhotos){
-                $scope.photos = oPhotos;
-                $scope.$apply();
-            });*/
 
         }]);
