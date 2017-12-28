@@ -246,7 +246,12 @@ angular.module('picsilyApp')
             };
 
             $scope.startUpload = function(){
-                // call uploader here
+                var oFileInput = jQuery(".fab-input")[0];
+                var oFile = oFileInput.files[0];
+                photoFactory.upload(oFile).then(function(){
+                    alert("Uploaded");
+                });
+                
             };
 
             $scope.handleFileInput = function(){

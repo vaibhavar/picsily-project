@@ -1,4 +1,7 @@
-<div ng-if="$root.isUserLoggedIn" class="fixed-action-btn smooth-scroll picsily-fab" style="position:fixed; bottom: 45px; right: 24px;" ng-controller="UploadController">
+
+<main>
+    <div class="container">
+<div ng-if="$root.isUserLoggedIn" class="col-md-2 fixed-action-btn smooth-scroll picsily-fab" style="position:fixed; bottom: 45px; right: 24px;" ng-controller="UploadController">
         <div class="upload-preview" ng-show="fileExists">
             <img src="" id="preview"/>
             <button class="btn red btn-primary btn-sm" ng-click="startUpload()"><i class="fa fa-upload"></i></button>
@@ -9,13 +12,13 @@
             <i class="fa fa-camera"></i>
         </button>
     </div>
-<main>
+</div>
     <div class="container" style="height:1300px;" ng-controller="HomeController">
         <div class="row mt-5 pt-5">
             <!-- Login box -->
             <div class="col-md-5" ng-if="!$root.isUserLoggedIn" ng-include="'views/login.html'"></div>
             <!-- Add photo widget -->
-            <div class="col-md-4" ng-if="$root.isUserLoggedIn" ng-include="'views/welcome.html'"></div>
+            <!-- <div class="col-md-4" ng-if="$root.isUserLoggedIn" ng-include="'views/welcome.html'"></div>-->
             <!-- Photos from community -->
             <div class="col-md-4" ng-if="$root.isUserLoggedIn" ng-repeat="photo in photos" ng-controller="CardsController" ng-include="'views/photo-card.html'"></div>
         </div>

@@ -73,6 +73,10 @@ angular.module('picsilyApp')
             oFactory.getPhotos = function(){
                 return picsilyAppUtil.serviceUtil.getDataFromService("/photos/");
             };
+
+            oFactory.upload = function(file){
+                return picsilyAppUtil.serviceUtil.uploadPhoto(file);
+            };
             
             return oFactory;
             

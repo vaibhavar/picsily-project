@@ -22,7 +22,7 @@ photoRouter.use(morgan('dev'));
 photoRouter.use(bodyParser.json());
 
 photoRouter.route("/upload")
-.post(upload.single("file"), function(req, res, next){    // Verify.verifyOrdinaryUser,
+.post(Verify.verifyOrdinaryUser, upload.single("file"), function(req, res, next){    // Verify.verifyOrdinaryUser,
     console.log("File = ",req.file.path);
     //res.json(req.file);
     cloudinary.config("cloudinary://578513365711197:");
@@ -31,7 +31,26 @@ photoRouter.route("/upload")
       api_key: '578513365711197', 
       api_secret: 'ngNEJtjRQf8Wui5SWr3PPKAWWcA' 
     });
-    cloudinary.uploader.upload(req.file.path, function(result) { res.json(result) });
+    cloudinary.uploader.upload(req.file.path, function(result) { 
+        // Add to photos db
+        var oUser = req.decoded._doc;
+        var oPhoto = {
+            title: "",
+            fileURL: result.url,
+            colors: [],
+            tags: [],
+            userId: mongoose.Types.ObjectId(req.decoded._doc._id)
+        }
+        
+        // Assuming req.body contains new photo object
+        Photos.create(oPhoto, function(err, photo){
+            if(err){
+                throw err;
+            }
+            var id = photo._id;
+            res.json(photo);
+        });
+     });
 });
 
 // Photos collection handler
@@ -49,7 +68,6 @@ photoRouter.route("/")
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
     // Assuming name and description has been sent from request in JSON
     if(req.body.fileURL){
-        console.log("User = ",req.decoded._doc);
         var oUser = req.decoded._doc;
         var oPhoto = {
             title: req.body.title,
