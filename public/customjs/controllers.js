@@ -219,6 +219,7 @@ angular.module('picsilyApp')
                 return response.json();
             }).then(function(oPhotos){
                 $scope.photos = oPhotos;
+                $scope.$apply();
             });
 
         }])
@@ -275,7 +276,7 @@ angular.module('picsilyApp')
                     $scope.isLoggedIn = true;
                     $rootScope.isUserLoggedIn = true;
                     $rootScope.user = response;
-                    $scope.apply();
+                    $scope.$apply();
                 }
             });
 
@@ -283,7 +284,7 @@ angular.module('picsilyApp')
                 return response.json();
             }).then(function(oPhotos){
                 $scope.photos = oPhotos;
-                $scope.apply();
+                $scope.$apply();
             });
 
         }]);

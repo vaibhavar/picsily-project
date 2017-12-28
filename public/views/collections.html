@@ -1,8 +1,8 @@
 <main>
-    <div class="container" style="height:1300px;" ng-controller="CollectionsController">
-        <div class="row mt-5 pt-5">
+    <div class="container" ng-controller="CollectionsController">
+        <div class="row mt-5">
+            <!-- Photos from community -->
+            <div class="col-md-4 mt-5" ng-repeat="photo in photos" ng-controller="CardsController" ng-include="'views/photo-card.html'"></div>
         </div>
-        <!-- Photos from community -->
-        <div class="col-md-4" ng-repeat="photo in photos" ng-controller="CardsController" ng-include="'views/photo-card.html'"></div>
     </div>
 </main>
