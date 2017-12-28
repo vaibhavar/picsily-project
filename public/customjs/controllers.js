@@ -32,7 +32,8 @@ angular.module('picsilyApp')
                             $scope.messages.loginMessage = "Logged in! :)";
                             $scope.loggedIn = true;
                             $rootScope.isUserLoggedIn = true;
-                            $scope.$apply();
+                            window.location.reload();
+                            //$scope.$apply();
                         },
                         function(response) {
                             $scope.messages.loginMessage = "Error: "+response.status + " " + response.statusText;
@@ -149,5 +150,7 @@ angular.module('picsilyApp')
                 $scope.photos = photoFactory.getMyPhotos();
                 $scope.$apply();
             });
+
+            photoFactory.loadMyPhotos();
 
         }]);
