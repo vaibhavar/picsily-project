@@ -224,6 +224,35 @@ angular.module('picsilyApp')
         }])
 
         .controller('UploadController', ['$scope','$rootScope', 'userFactory',  'photoFactory', function($scope, $rootScope, userFactory, photoFactory) {
+
+            $scope.fileExists = false;
+
+            $scope.handleFile = function(scope){
+                var oFileInput = jQuery(".fab-input")[0];
+                var oFile = oFileInput.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  jQuery('#preview').attr('src', e.target.result);
+                  scope.fileExists = true;
+                  scope.$apply();
+                };
+                reader.readAsDataURL(oFile);
+            };
+
+            $scope.cancelFile = function(){
+                $scope.fileExists = false;
+                var oFileInput = jQuery(".fab-input");
+                oFileInput.val('');
+            };
+
+            $scope.startUpload = function(){
+                // call uploader here
+            };
+
+            $scope.handleFileInput = function(){
+                jQuery(".fab-input").trigger('click');
+            };
+
             $scope.upload = function(){
                 debugger;
             }

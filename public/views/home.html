@@ -1,3 +1,14 @@
+<div ng-if="$root.isUserLoggedIn" class="fixed-action-btn smooth-scroll picsily-fab" style="position:fixed; bottom: 45px; right: 24px;" ng-controller="UploadController">
+        <div class="upload-preview" ng-show="fileExists">
+            <img src="" id="preview"/>
+            <button class="btn red btn-primary btn-sm" ng-click="startUpload()"><i class="fa fa-upload"></i></button>
+            <button class="btn btn-danger btn-sm" ng-click="cancelFile()"><i class="fa fa-remove"></i></button>
+        </div>
+        <input type="file" name="file" class="fab-input" onchange="angular.element(this).scope().handleFile(angular.element(this).scope())"/>
+        <button ng-show="!fileExists" class="btn red btn-round btn-medium-round flex-center" ng-click="handleFileInput()">
+            <i class="fa fa-camera"></i>
+        </button>
+    </div>
 <main>
     <div class="container" style="height:1300px;" ng-controller="HomeController">
         <div class="row mt-5 pt-5">
@@ -8,5 +19,5 @@
             <!-- Photos from community -->
             <div class="col-md-4" ng-if="$root.isUserLoggedIn" ng-repeat="photo in photos" ng-controller="CardsController" ng-include="'views/photo-card.html'"></div>
         </div>
-    </div>
+    </div>                          
 </main>

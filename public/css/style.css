@@ -1,1 +1,30 @@
 /* Your custom styles */
+.btn-round {
+	border-radius: 50%;
+}
+
+.btn-medium-round{
+    width: 65px;
+    height: 65px;
+}
+
+.fab-input{
+	visibility: hidden;
+	width: 10px;
+	height: 10px;
+}
+
+.upload-preview{
+	width: 200px;
+	height: auto;
+	border:1px solid white;
+	background: #efefef;
+}
+.upload-preview img{
+	width:100%;
+	height: auto;
+}
+
+.picsily-fab{
+	text-align: center;
+}
