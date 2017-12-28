@@ -215,12 +215,16 @@ angular.module('picsilyApp')
 
         .controller('CollectionsController', ['$scope', 'photoFactory', function($scope, photoFactory) {
             $scope.photos = [];
-            photoFactory.getPhotos().then(function(response){
+            $scope.photos = photoFactory.getPhotos();
+            photoFactory.observe(function(){
+                $scope.photos = photoFactory.getPhotos();
+            });
+            /*photoFactory.getPhotos().then(function(response){
                 return response.json();
             }).then(function(oPhotos){
                 $scope.photos = oPhotos;
                 $scope.$apply();
-            });
+            });*/
 
         }])
 
@@ -249,8 +253,13 @@ angular.module('picsilyApp')
             $scope.startUpload = function(){
                 var oFileInput = jQuery(".fab-input")[0];
                 var oFile = oFileInput.files[0];
-                photoFactory.upload(oFile).then(function(){
-                    alert("Uploaded");
+                photoFactory.upload(oFile).then(function(oPhoto){
+                    $scope.cancelFile();
+                    $scope.$apply();
+                    oPhoto.json().then(function(oPhoto){
+                        photoFactory.addPhoto(oPhoto);    
+                        alert("Uploaded");
+                    })
                 });
                 
             };
@@ -259,11 +268,10 @@ angular.module('picsilyApp')
                 jQuery(".fab-input").trigger('click');
             };
 
-            $scope.upload = function(){
-                debugger;
-            }
         }])
+        .controller('MenuController', ['$scope', '$rootScope', 'userFactory', 'photoFactory', function($scope, $rootScope, userFactory, photoFactory) {
 
+        }])
         .controller('HomeController', ['$scope', '$rootScope', 'userFactory', 'photoFactory', function($scope, $rootScope, userFactory, photoFactory) {
             $scope.photos = [];
             $scope.isLoggedIn = false;
@@ -280,11 +288,18 @@ angular.module('picsilyApp')
                 }
             });
 
-            photoFactory.getPhotos().then(function(response){
+            $scope.photos = photoFactory.getPhotos();
+
+            photoFactory.observe(function(){
+                $scope.photos = photoFactory.getPhotos();
+                $scope.$apply();
+            });
+
+            /*photoFactory.getPhotos().then(function(response){
                 return response.json();
             }).then(function(oPhotos){
                 $scope.photos = oPhotos;
                 $scope.$apply();
-            });
+            });*/
 
         }]);

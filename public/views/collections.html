@@ -1,6 +1,9 @@
 <main>
     <div class="container" ng-controller="CollectionsController">
-        <div class="row mt-5">
+        <div class="row mt-4">
+        	<div class="col-md-12">
+        		<h3>Pictures from Picsily Community <i class="fa fa-world"></i></h3>
+        	</div>
             <!-- Photos from community -->
             <div class="col-md-4 mt-5" ng-repeat="photo in photos" ng-controller="CardsController" ng-include="'views/photo-card.html'"></div>
         </div>

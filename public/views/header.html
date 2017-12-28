@@ -1,26 +1,26 @@
-  <header>
-<nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-dark bg-pink scrolling-navbar">
-            <a class="navbar-brand" href="/"><strong>Picsily</strong></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><span class="hidden-xs"> Home</span> </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" ui-sref="app.collections">Collections</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">People</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-dark bg-pink scrolling-navbar" ng-controller="MenuController">
+        <a class="navbar-brand" href="/"><strong>Picsily</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><span class="hidden-xs"> Home</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="app.collections">Collections</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="app.people">People</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

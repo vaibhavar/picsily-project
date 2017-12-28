@@ -70,13 +70,47 @@ angular.module('picsilyApp')
         .factory('photoFactory', ["$resource", 'baseURL', function($resource, baseURL) {
     
             var oFactory = {};
+            oFactory.photos = [];
+            oFactory.feedPhotos = [];
+            oFactory.observers = [];
+
+            oFactory.updateObservers = function(){
+                for (var i = oFactory.observers.length - 1; i >= 0; i--) {
+                     oFactory.observers[i].call();
+                 } 
+            };
+
+            oFactory.observe = function(oCallback){
+                oFactory.observers.push(oCallback);
+            }
+
+            oFactory.addPhoto = function(oPhoto){
+                var aTempPhotos = oFactory.photos.slice();
+                aTempPhotos.push(oPhoto);
+                angular.copy(aTempPhotos, oFactory.photos);
+                oFactory.updateObservers();
+            }
+
+            oFactory.reloadPhotos = function(){
+                picsilyAppUtil.serviceUtil.getDataFromService("/photos/")
+                .then(function(response){
+                    return response.json()
+                })
+                .then(function(aPhotos){
+                    angular.copy(aPhotos, oFactory.photos);
+                    oFactory.updateObservers();
+                });
+            }
+
             oFactory.getPhotos = function(){
-                return picsilyAppUtil.serviceUtil.getDataFromService("/photos/");
+                return oFactory.photos;
             };
 
             oFactory.upload = function(file){
                 return picsilyAppUtil.serviceUtil.uploadPhoto(file);
             };
+
+            oFactory.reloadPhotos();
             
             return oFactory;
             
