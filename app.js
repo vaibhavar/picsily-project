@@ -41,18 +41,32 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(function(req, res, next) {
-  // Allow requests from Picsily UI
-  res.header('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN);
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser({ keepExtensions: true, uploadDir: 'uploads', limit: '50mb' }));
 app.use(cookieParser());
+
+app.use(function(req, res, next) {
+  // Allow requests from Picsily UI
+  res.header('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN);
+  // Allow custom header to be set
+  res.header('Access-Control-Allow-Headers', 'x-access-token');
+  // Allow all methods
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH, OPTIONS');
+  // Allow cookies
+  res.header('Access-Control-Allow-Credentials', true);
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.send();
+  } else {
+    // Other requests after preflight
+    next();
+  }
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
