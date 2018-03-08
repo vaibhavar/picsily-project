@@ -41,9 +41,11 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.all('/', function(req, res, next) {
+app.use(function(req, res, next) {
   // Allow requests from Picsily UI
-  res.header('Access-Control-Allow-Origin', 'https://picsily.herokuapp.com');
+  res.header('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN);
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
 app.use(logger('dev'));
