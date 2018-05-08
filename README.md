@@ -1,5 +1,5 @@
 # picsily-project
-Picsily project submitted for Coursra Full Stack Web Development Certification
+Node Server + routes for Picisly - a photo sharing platform
 
 # Run
 npm start
